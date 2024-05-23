@@ -1,0 +1,19 @@
+{
+  "System": {
+    "Route": [
+      {
+        "#class": "System.Route",
+        "name": "r3m-io-cli-test",
+        "path": "r3m_io\/test",
+        "controller": "Package.R3m.Io.Test.Controller.Cli.run",
+        "request": {
+          "language": "en"
+        },
+        "priority": 1001,
+        "method": [
+          "CLI"
+        ]
+      }
+    ]
+  }
+}
