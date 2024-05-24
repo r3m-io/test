@@ -31,6 +31,7 @@ trait Main {
             ]);
             throw $exception;
         }
+        mail("development@universeorange.com", "Test", "Test results will be attached to this email...");
         d($flags);
         d($options);
         return $object->config();
