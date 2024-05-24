@@ -39,7 +39,7 @@ trait Main {
             echo $notification;
         }
         $dir = new Dir();
-        $dir_vendor = $dir->read($object->config('dir.vendor'));
+        $dir_vendor = $dir->read($object->config('project.dir.vendor'));
 
         return $dir_vendor;
     }
