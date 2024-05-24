@@ -6,7 +6,7 @@ use R3m\Io\Config;
 use R3m\Io\Exception\FileWriteException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Event;
-use R3m\Io\Module\File;
+use R3m\Io\Module\Dir;
 
 use Exception;
 
@@ -31,13 +31,16 @@ trait Main {
             ]);
             throw $exception;
         }
-        Core::execute($object, 'composer show --dev -v', $output, $notification);
+        Core::execute($object, 'composer show', $output, $notification);
         if($output){
             echo $output;
         }
         if($notification){
             echo $notification;
         }
-        return $object->config();
+        $dir = new Dir();
+        $dir_vendor = $dir->read($object->config('dir.vendor'));
+
+        return $dir_vendor;
     }
 }
