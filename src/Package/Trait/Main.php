@@ -31,9 +31,13 @@ trait Main {
             ]);
             throw $exception;
         }
-        mail("development@universeorange.com", "Test", "Test results will be attached to this email...");
-        d($flags);
-        d($options);
+        Core::execute($object, 'composer show -i', $output, $notification);
+        if($output){
+            echo $output;
+        }
+        if($notification){
+            echo $notification;
+        }
         return $object->config();
     }
 }
