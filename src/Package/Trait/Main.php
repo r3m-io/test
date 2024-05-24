@@ -31,7 +31,7 @@ trait Main {
             ]);
             throw $exception;
         }
-        Core::execute($object, 'composer show -i', $output, $notification);
+        Core::execute($object, 'composer show', $output, $notification);
         if($output){
             echo $output;
         }
