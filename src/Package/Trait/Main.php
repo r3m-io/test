@@ -20,7 +20,7 @@ trait Main {
      * @throws FileAppendException
      * @throws Exception
      */
-    public function run_test($flags, $options): void
+    public function run_test($flags, $options): mixed
     {
         $object = $this->object();
         if($object->config(Config::POSIX_ID) !== 0){
@@ -31,5 +31,8 @@ trait Main {
             ]);
             throw $exception;
         }
+        d($flags);
+        d($options);
+        return $object->config();
     }
 }
