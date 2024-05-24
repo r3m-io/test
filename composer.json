@@ -11,7 +11,6 @@
     "r3m_io/framework": "*"
   },
   "require-dev": {
-    "phpstan/phpstan": "^1.10",
     "pestphp/pest": "^2.34"
   },
   "license" : "MIT",
