@@ -22,11 +22,9 @@ class Cli extends Controller {
     const DIR = __DIR__ . '/';
     const MODULE_INFO = 'Info';
     const INFO = [
-        '{{binary()}} r3m_io/host                    | Host options',
-        '{{binary()}} r3m_io/host setup              | Host setup',
-        '{{binary()}} r3m_io/host name add           | /etc/hosts add',
-        '{{binary()}} r3m_io/host name delete        | /etc/hosts delete',
-        '{{binary()}} r3m_io/host name has           | /etc/hosts has',
+        '{{binary()}} r3m_io/test                    | Test options',
+        '{{binary()}} r3m_io/test setup              | Test setup',
+        '{{binary()}} r3m_io/test run                | Run tests'
     ];
 
     /**
