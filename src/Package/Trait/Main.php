@@ -98,6 +98,7 @@ trait Main {
         if(!Dir::is($object->config('project.dir.test'))){
             Dir::create($object->config('project.dir.test'), Dir::CHMOD);
         }
+        $dir_output = [];
         foreach($dir_vendor as $nr => $record){
             $package = $record->name;
             if(
@@ -127,8 +128,19 @@ trait Main {
                                                 //we want pest tests
                                                 continue;
                                             }
-                                            d($dir_record);
-                                            d($file);
+                                            $dir_target = $object->config('project.dir.test') .
+                                                $dir_record->name .
+                                                $object->config('ds');
+                                            $target =
+                                                $dir_target .
+                                                $file->name
+                                            ;
+                                            if(!Dir::is($dir_target)){
+                                                Dir::create($dir_target, Dir::CHMOD);
+                                            }
+                                            if(!File::exist($target)){
+                                                File::copy($file->url, $target);
+                                            }
                                             //determine test type (pest / phpunit)
                                             //cp $dir_test_record->url to test directory
                                         }
@@ -140,6 +152,7 @@ trait Main {
                 }
             }
         }
+        $dir_output = $dir->read($object->config('project.dir.test'), true);
         /*
          * <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="tests/bootstrap.php"
