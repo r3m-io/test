@@ -138,6 +138,16 @@ trait Main {
                                             ' with version: '.
                                             $package['version'] . PHP_EOL
                                         ;
+                                        echo CLi::critical('test') . PHP_EOL;
+                                        echo CLi::debug('test') . PHP_EOL;
+                                        echo CLi::emergency('test') . PHP_EOL;
+                                        echo CLi::error('test') . PHP_EOL;
+                                        echo CLi::info('test') . PHP_EOL;
+                                        echo CLi::notice('test') . PHP_EOL;
+                                        echo CLi::warning('test') . PHP_EOL;
+
+
+
                                     }
                                     foreach($dir_test_read as $dir_test_nr => $file){
                                         if($file->type === File::TYPE){
