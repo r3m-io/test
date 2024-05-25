@@ -195,14 +195,14 @@ trait Main {
         echo CLi::notice('test') . PHP_EOL;
         echo CLi::warning('test') . PHP_EOL;
 
-        echo CLi::alert(' ') . 'alert' . PHP_EOL;
-        echo CLi::critical(' ') . 'critical' . PHP_EOL;
-        echo CLi::debug(' ') . 'debug' . PHP_EOL;
-        echo CLi::emergency(' ') . 'emergency' . PHP_EOL;
-        echo CLi::error(' ') . 'error' . PHP_EOL;
-        echo CLi::info(' ') . 'info' . PHP_EOL;
-        echo CLi::notice(' ') . 'notice' . PHP_EOL;
-        echo CLi::warning(' ') . 'warning' . PHP_EOL;
+        echo CLi::alert(chr(160)) . 'alert' . PHP_EOL;
+        echo CLi::critical(chr(160)) . 'critical' . PHP_EOL;
+        echo CLi::debug(chr(160)) . 'debug' . PHP_EOL;
+        echo CLi::emergency(chr(160)) . 'emergency' . PHP_EOL;
+        echo CLi::error(chr(160)) . 'error' . PHP_EOL;
+        echo CLi::info(chr(160)) . 'info' . PHP_EOL;
+        echo CLi::notice(chr(160)) . 'notice' . PHP_EOL;
+        echo CLi::warning(chr(160)) . 'warning' . PHP_EOL;
         $command = './vendor/bin/pest --init';
         $code = Core::execute($object, $command, $output, $notification);
         if($output){
