@@ -72,7 +72,6 @@ trait Main {
 
         $testable = [];
         $testable[] = 'r3m_io';
-
         if(
             property_exists($options, 'testable') &&
             is_array($options->testable)
@@ -96,9 +95,9 @@ trait Main {
                 'Tests'
             ];
         }
-        ddd($object->config('project.dir'));
-        Dir::create($object->config('project.dir.test'));
-
+        if(!Dir::is($object->config('project.dir.test'))){
+            Dir::create($object->config('project.dir.test'), Dir::CHMOD);
+        }
         foreach($dir_vendor as $nr => $record){
             $package = $record->name;
             if(
@@ -120,9 +119,16 @@ trait Main {
                             ){
                                 $dir_test_read = $dir->read($dir_test_url);
                                 if($dir_test_read){
-                                    foreach($dir_test_read as $dir_test_nr => $dir_test_record){
-                                        if($dir_test_record === File::TYPE){
+                                    foreach($dir_test_read as $dir_test_nr => $file){
+                                        if($file->type === File::TYPE){
+                                            $read = File::read($file->url);
+                                            if(str_contains($read, 'PHPUnit\Framework\TestCase')){
+                                                //we want pest tests
+                                                continue;
+                                            }
 
+                                            d($file);
+                                            //determine test type (pest / phpunit)
                                             //cp $dir_test_record->url to test directory
                                         }
                                     }
