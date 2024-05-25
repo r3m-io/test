@@ -136,10 +136,9 @@ trait Main {
                                             Cli::tput('reset') .
                                             ' tests from ' . $package['name'] .
                                             ' with version: '.
-                                            $package['version'] . ', count: '
+                                            $package['version'] . PHP_EOL
                                         ;
                                     }
-                                    $count = 0;
                                     foreach($dir_test_read as $dir_test_nr => $file){
                                         if($file->type === File::TYPE){
                                             $read = File::read($file->url);
@@ -157,10 +156,8 @@ trait Main {
                                             if(!File::exist($target)){
                                                 File::copy($file->url, $target);
                                             }
-                                            $count++;
                                         }
                                     }
-                                    echo $count . PHP_EOL;
                                 }
                             }
                         }
