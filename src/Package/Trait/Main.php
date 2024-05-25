@@ -173,7 +173,7 @@ trait Main {
         $write = [];
         $write[] = '<?php';
         $write[] = '';
-        $write[] = 'require_once \'/../vendor/autoload.php\';';
+        $write[] = 'require_once \'../vendor/autoload.php\';';
         $write[] = '';
         File::write($object->config('project.dir.test') . 'bootstrap.php', implode(PHP_EOL, $write));
         $command = './vendor/bin/pest --init';
