@@ -131,7 +131,7 @@ trait Main {
                                 if($dir_test_read){
                                     if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
                                         $package = $packages[$record->name . '/' . $dir_record->name];
-                                        echo Cli::color(['r'=>255, 'g'=>255, 'b'=>255], ['r' => 0, 'g'=>50, 'b' =>200]) .
+                                        echo Cli::color(['r'=>255, 'g'=>255, 'b'=>255], ['r' => 0, 'g'=>200, 'b' =>200]) .
                                             ' Copying ' .
                                             Cli::tput('reset') .
                                             ' tests from ' . $package['name'] .
