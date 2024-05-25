@@ -59,9 +59,41 @@ trait Main {
         $dir = new Dir();
         $dir_vendor = $dir->read($object->config('project.dir.vendor'));
 
+        if(!$dir_vendor){
+            $exception = new Exception('No vendor directory found...');
+            Event::trigger($object, 'r3m.io.test.main.run.test', [
+                'options' => $options,
+                'exception' => $exception
+            ]);
+            throw $exception;
+        }
+
         $testable = [];
         $testable[] = 'r3m_io';
 
+        if(
+            property_exists($options, 'testable') &&
+            is_array($options->testable)
+        ){
+            $testable = $options->testable;
+        }
+        $dir_tests = null;
+        if(property_exists($options, 'directory_tests')){
+            if(is_string($options->directory_tests)){
+                $dir_tests = [$options->directory_tests];
+            }
+            elseif(is_array($options->directory_tests)){
+                $dir_tests = $options->directory_tests;
+            }
+        }
+        if($dir_tests === null){
+            $dir_tests = [
+                'test',
+                'tests',
+                'Test',
+                'Tests'
+            ];
+        }
         foreach($dir_vendor as $nr => $record){
             $package = $record->name;
             if(
@@ -73,7 +105,14 @@ trait Main {
                 $record->type === Dir::TYPE
             ){
                 $dir_inner = $dir->read($record->url);
-                d($dir_inner);
+                if($dir_inner){
+                    foreach($dir_inner as $dir_inner_nr => $dir_record){
+                        foreach($dir_tests as $dir_test){
+                            $dir_test = $dir_record->url . $dir_test . $object->config('ds');
+                            d($dir_test);
+                        }
+                    }
+                }
             }
         }
         //collect every test directory and move them to the test directory
