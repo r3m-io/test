@@ -98,7 +98,7 @@ trait Main {
         if(!Dir::is($object->config('project.dir.test'))){
             Dir::create($object->config('project.dir.test'), Dir::CHMOD);
         }
-        $dir_output = [];
+        $testsuite = [];
         foreach($dir_vendor as $nr => $record){
             $package = $record->name;
             if(
@@ -138,6 +138,10 @@ trait Main {
                                             if(!Dir::is($dir_target)){
                                                 Dir::create($dir_target, Dir::CHMOD);
                                             }
+                                            $testsuite[] = [
+                                                'name' => $dir_record->name,
+                                                'directory' => $dir_target
+                                            ];
                                             if(!File::exist($target)){
                                                 File::copy($file->url, $target);
                                             }
@@ -153,6 +157,7 @@ trait Main {
             }
         }
         $dir_output = $dir->read($object->config('project.dir.test'), true);
+        d($testsuite);
         /*
          * <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="tests/bootstrap.php"
@@ -172,6 +177,6 @@ trait Main {
         //by default if file exist it won't be overwritten, so we need to implement option force & patch
 
 
-        return $dir_vendor;
+        return $dir_output;
     }
 }
