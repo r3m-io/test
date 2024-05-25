@@ -22,7 +22,7 @@ trait Main {
      * @throws FileAppendException
      * @throws Exception
      */
-    public function run_test($flags, $options): mixed
+    public function run_test($flags, $options): void
     {
         $object = $this->object();
         if($object->config(Config::POSIX_ID) !== 0){
@@ -69,7 +69,7 @@ trait Main {
             ]);
             throw $exception;
         }
-
+        //only pest tests are supported
         $testable = [];
         $testable[] = 'r3m_io';
         if(
@@ -118,7 +118,6 @@ trait Main {
                                 File::exist($dir_test_url) &&
                                 Dir::is($dir_test_url)
                             ){
-//                                $command = 'vendor/bin/pest' # cannot be here
                                 $dir_test_read = $dir->read($dir_test_url);
                                 if($dir_test_read){
                                     foreach($dir_test_read as $dir_test_nr => $file){
@@ -145,8 +144,6 @@ trait Main {
                                             if(!File::exist($target)){
                                                 File::copy($file->url, $target);
                                             }
-                                            //determine test type (pest / phpunit)
-                                            //cp $dir_test_record->url to test directory
                                         }
                                     }
                                 }
@@ -212,7 +209,5 @@ trait Main {
             ]);
             exit($code);
         }
-//        $dir_output = $dir->read($object->config('project.dir.test'), true);
-        return null;
     }
 }
