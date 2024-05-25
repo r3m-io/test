@@ -33,6 +33,7 @@ trait Main {
         }
         Core::execute($object, 'composer show', $output, $notification);
         if($output){
+            d($output);
             echo $output;
         }
         if($notification){
