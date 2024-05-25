@@ -127,18 +127,19 @@ trait Main {
                                     'name' => $dir_record->name,
                                     'directory' => $dir_target
                                 ];
-                                if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
-                                    $package = $packages[$record->name . '/' . $dir_record->name];
-                                    echo Cli::color(['r'=>255, 'g'=>255, 'b'=>255], ['r' => 0, 'g'=>50, 'b' =>200]) .
-                                        ' Copying ' .
-                                        Cli::tput('reset') .
-                                        ' tests from ' . $package['name'] .
-                                        ' with version: '.
-                                        $package['version'] . '...' .
-                                        PHP_EOL;
-                                }
                                 $dir_test_read = $dir->read($dir_test_url);
                                 if($dir_test_read){
+                                    if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
+                                        $package = $packages[$record->name . '/' . $dir_record->name];
+                                        echo Cli::color(['r'=>255, 'g'=>255, 'b'=>255], ['r' => 0, 'g'=>50, 'b' =>200]) .
+                                            ' Copying ' .
+                                            Cli::tput('reset') .
+                                            ' tests from ' . $package['name'] .
+                                            ' with version: '.
+                                            $package['version'] . ', count: '
+                                        ;
+                                    }
+                                    $count = 0;
                                     foreach($dir_test_read as $dir_test_nr => $file){
                                         if($file->type === File::TYPE){
                                             $read = File::read($file->url);
@@ -156,8 +157,10 @@ trait Main {
                                             if(!File::exist($target)){
                                                 File::copy($file->url, $target);
                                             }
+                                            $count++;
                                         }
                                     }
+                                    echo $count . PHP_EOL;
                                 }
                             }
                         }
