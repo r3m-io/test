@@ -60,6 +60,19 @@ trait Main {
         $dir = new Dir();
         $dir_vendor = $dir->read($object->config('project.dir.vendor'));
 
+        $testable = [];
+        $testable[] = 'r3m_io';
+
+        foreach($dir_vendor as $nr => $record){
+            $package = $record->name;
+            if(array_key_exists($package, $testable)){
+                $dir_inner = $dir->read($object->config($record->url));
+                d($dir_inner);
+            }
+        }
+
+
+
         d($packages);
 
         //collect every test directory and move them to the test directory
