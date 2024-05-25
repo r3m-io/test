@@ -177,24 +177,40 @@ trait Main {
         $write[] = '';
         File::write($object->config('project.dir.test') . 'bootstrap.php', implode(PHP_EOL, $write));
         $command = './vendor/bin/pest --init';
-        Core::execute($object, $command, $output, $notification);
+        $code = Core::execute($object, $command, $output, $notification);
         if($output){
             echo $output;
         }
         if($notification){
             echo $notification;
+        }
+        if($code !== 0){
+            $exception = new Exception('Pest initialization failed...');
+            Event::trigger($object, 'r3m.io.test.main.run.test', [
+                'options' => $options,
+                'exception' => $exception
+            ]);
+            throw $exception;
         }
         $command = './vendor/bin/pest';
-        Core::execute($object, $command, $output, $notification);
+        $code = Core::execute($object, $command, $output, $notification);
         if($output){
             echo $output;
         }
         if($notification){
             echo $notification;
+        }
+        if($code !== 0){
+            $exception = new Exception('Pest initialization failed...');
+            Event::trigger($object, 'r3m.io.test.main.run.test', [
+                'options' => $options,
+                'exception' => $exception
+            ]);
+            throw $exception;
         }
         //collect every test directory and move them to the test directory
         //by default if file exist it won't be overwritten, so we need to implement option force & patch
         $dir_output = $dir->read($object->config('project.dir.test'), true);
-        return null;
+        return $dir_output;
     }
 }
