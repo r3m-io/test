@@ -156,8 +156,6 @@ trait Main {
                 }
             }
         }
-        $dir_output = $dir->read($object->config('project.dir.test'), true);
-
         $url_xml = $object->config('project.dir.root') . 'phpunit.xml';
         $write = [];
         $write[] = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -183,6 +181,7 @@ trait Main {
         }
         //collect every test directory and move them to the test directory
         //by default if file exist it won't be overwritten, so we need to implement option force & patch
+        $dir_output = $dir->read($object->config('project.dir.test'), true);
         return $dir_output;
     }
 }
