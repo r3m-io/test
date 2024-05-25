@@ -127,7 +127,7 @@ trait Main {
                                                 //we want pest tests
                                                 continue;
                                             }
-
+                                            d($dir_record);
                                             d($file);
                                             //determine test type (pest / phpunit)
                                             //cp $dir_test_record->url to test directory
