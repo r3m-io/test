@@ -185,15 +185,6 @@ trait Main {
         $write[] = 'require_once __DIR__ . \'/../vendor/autoload.php\';';
         $write[] = '';
         File::write($object->config('project.dir.test') . 'bootstrap.php', implode(PHP_EOL, $write));
-
-        echo CLi::alert('test') . PHP_EOL;
-        echo CLi::critical('test') . PHP_EOL;
-        echo CLi::debug('test') . PHP_EOL;
-        echo CLi::emergency('test') . PHP_EOL;
-        echo CLi::error('test') . PHP_EOL;
-        echo CLi::info('test') . PHP_EOL;
-        echo CLi::notice('test') . PHP_EOL;
-        echo CLi::warning('test') . PHP_EOL;
         Cli::labels();
         $command = './vendor/bin/pest --init';
         $code = Core::execute($object, $command, $output, $notification);
