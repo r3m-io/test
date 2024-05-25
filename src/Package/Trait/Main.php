@@ -35,7 +35,6 @@ trait Main {
         $packages = [];
         if($output){
             $data = explode(PHP_EOL, $output);
-
             foreach($data as $nr => $line){
                 $line = trim($line);
                 if($line){
@@ -65,16 +64,18 @@ trait Main {
 
         foreach($dir_vendor as $nr => $record){
             $package = $record->name;
-            if(array_key_exists($package, $testable)){
+            if(
+                in_array(
+                    $package,
+                    $testable,
+                    true
+                ) &&
+                $record->type === Dir::TYPE
+            ){
                 $dir_inner = $dir->read($object->config($record->url));
                 d($dir_inner);
             }
         }
-
-
-
-        d($packages);
-
         //collect every test directory and move them to the test directory
         //by default if file exist it wont be overwritten, so we need to implement option force & patch
 
