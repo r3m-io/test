@@ -3,6 +3,7 @@ namespace Package\R3m\Io\Test\Trait;
 
 use R3m\Io\Config;
 
+use R3m\Io\Module\Cli;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Event;
 use R3m\Io\Module\Dir;
@@ -119,7 +120,7 @@ trait Main {
                                 Dir::is($dir_test_url)
                             ){
                                 $dir_target = $object->config('project.dir.test') .
-                                    $dir_record->name .
+                                    ucfirst($dir_record->name) .
                                     $object->config('ds')
                                 ;
                                 $testsuite[] = [
@@ -128,7 +129,13 @@ trait Main {
                                 ];
                                 if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
                                     $package = $packages[$record->name . '/' . $dir_record->name];
-                                    echo 'Copying tests from ' . $package['name'] . ' with version: '. $package['version'] . '...' . PHP_EOL;
+                                    echo Cli::color(['r'=>255, 'g'=>255, 'b'=>255], ['r' => 0, 'g'=>50, 'b' =>200]) .
+                                        ' Copying ' .
+                                        Cli::tput('reset') .
+                                        ' tests from ' . $package['name'] .
+                                        ' with version: '.
+                                        $package['version'] . '...' .
+                                        PHP_EOL;
                                 }
                                 $dir_test_read = $dir->read($dir_test_url);
                                 if($dir_test_read){
