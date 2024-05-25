@@ -36,6 +36,7 @@ trait Main {
             echo $output;
         }
         if($notification){
+            d($notification);
             echo $notification;
         }
         $dir = new Dir();
