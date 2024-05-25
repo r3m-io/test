@@ -157,26 +157,32 @@ trait Main {
             }
         }
         $dir_output = $dir->read($object->config('project.dir.test'), true);
+
+        $url_xml = $object->config('project.dir.root') . 'phpunit.xml';
+        $write = [];
+        $write[] = '<?xml version="1.0" encoding="UTF-8"?>';
+        $write[] = '<phpunit bootstrap="Test/bootstrap.php"';
+        $write[] = '         colors="true">';
+        $write[] = '    <testsuites>';
+        foreach($testsuite as $nr => $record){
+            $write[] = '        <testsuite name="' . $record['name'] . '">';
+            $write[] = '            <directory>' . $record['directory'] . '</directory>';
+            $write[] = '        </testsuite>';
+        }
+        $write[] = '    </testsuites>';
+        $write[] = '</phpunit>';
+        File::write($url_xml, implode(PHP_EOL, $write));
         d($testsuite);
-        /*
-         * <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="tests/bootstrap.php"
-         colors="true">
-    <testsuites>
-        <testsuite name="Unit Tests">
-            <directory>tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature Tests">
-            <directory>tests/Feature</directory>
-        </testsuite>
-    </testsuites>
-</phpunit>
-         */
-//        ./vendor/bin/pest --init
+        $command = './vendor/bin/pest --init';
+        Core::execute($object, $command, $output, $notification);
+        if($output){
+            echo $output;
+        }
+        if($notification){
+            echo $notification;
+        }
         //collect every test directory and move them to the test directory
         //by default if file exist it won't be overwritten, so we need to implement option force & patch
-
-
         return $dir_output;
     }
 }
