@@ -32,16 +32,39 @@ trait Main {
             throw $exception;
         }
         Core::execute($object, 'composer show', $output, $notification);
+        $packages = [];
         if($output){
-            d($output);
+            $data = explode(PHP_EOL, $output);
+
+            foreach($data as $nr => $line){
+                $line = trim($line);
+                if($line){
+                    $line = explode(' ', $line, 2);
+                    $package = $line[0];
+                    $record = trim($line[1]);
+                    $line = explode(' ', $line, 2);
+                    $version = $line[0];
+                    $description = trim($line[1]);
+                    $packages[$package] = [
+                        'name' => $package,
+                        'version' => $version,
+                        'description' => $description
+                    ];
+                }
+            }
             echo $output;
         }
         if($notification){
-            d($notification);
             echo $notification;
         }
         $dir = new Dir();
         $dir_vendor = $dir->read($object->config('project.dir.vendor'));
+
+        d($packages);
+
+        //collect every test directory and move them to the test directory
+        //by default if file exist it wont be overwritten, so we need to implement option force & patch
+
 
         return $dir_vendor;
     }
