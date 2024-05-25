@@ -131,7 +131,9 @@ trait Main {
                                 if($dir_test_read){
                                     if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
                                         $package = $packages[$record->name . '/' . $dir_record->name];
-                                        echo Cli::warning('Copying') .
+                                        echo Cli::alert('Copying', [
+                                            'capitals' => true
+                                            ]) .
                                             ' tests from ' . $package['name'] .
                                             ' with version: '.
                                             $package['version'] . PHP_EOL
