@@ -128,7 +128,7 @@ trait Main {
                                 ];
                                 if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
                                     $package = $packages[$record->name . '/' . $dir_record->name];
-                                    d($package);
+                                    echo 'Copying tests from ' . $package['name'] . ' with version: '. $package['version'] . '...' . PHP_EOL;
                                 }
                                 $dir_test_read = $dir->read($dir_test_url);
                                 if($dir_test_read){
