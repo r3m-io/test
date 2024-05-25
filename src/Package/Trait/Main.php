@@ -53,10 +53,10 @@ trait Main {
                     ];
                 }
             }
-            echo $output;
+//            echo $output;
         }
         if($notification){
-            echo $notification;
+//            echo $notification;
         }
         $dir = new Dir();
         $dir_vendor = $dir->read($object->config('project.dir.vendor'));
@@ -118,6 +118,18 @@ trait Main {
                                 File::exist($dir_test_url) &&
                                 Dir::is($dir_test_url)
                             ){
+                                $dir_target = $object->config('project.dir.test') .
+                                    $dir_record->name .
+                                    $object->config('ds')
+                                ;
+                                $testsuite[] = [
+                                    'name' => $dir_record->name,
+                                    'directory' => $dir_target
+                                ];
+                                if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
+                                    $package = $packages[$record->name . '/' . $dir_record->name];
+                                    d($package);
+                                }
                                 $dir_test_read = $dir->read($dir_test_url);
                                 if($dir_test_read){
                                     foreach($dir_test_read as $dir_test_nr => $file){
@@ -127,9 +139,6 @@ trait Main {
                                                 //we want pest tests
                                                 continue;
                                             }
-                                            $dir_target = $object->config('project.dir.test') .
-                                                $dir_record->name .
-                                                $object->config('ds');
                                             $target =
                                                 $dir_target .
                                                 $file->name
@@ -137,10 +146,6 @@ trait Main {
                                             if(!Dir::is($dir_target)){
                                                 Dir::create($dir_target, Dir::CHMOD);
                                             }
-                                            $testsuite[] = [
-                                                'name' => $dir_record->name,
-                                                'directory' => $dir_target
-                                            ];
                                             if(!File::exist($target)){
                                                 File::copy($file->url, $target);
                                             }
