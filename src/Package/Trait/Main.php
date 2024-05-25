@@ -117,6 +117,7 @@ trait Main {
                                 File::exist($dir_test_url) &&
                                 Dir::is($dir_test_url)
                             ){
+//                                $command = 'vendor/bin/pest' # cannot be here
                                 $dir_test_read = $dir->read($dir_test_url);
                                 if($dir_test_read){
                                     foreach($dir_test_read as $dir_test_nr => $file){
@@ -139,6 +140,20 @@ trait Main {
                 }
             }
         }
+        /*
+         * <?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php"
+         colors="true">
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature Tests">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
+         */
 //        ./vendor/bin/pest --init
         //collect every test directory and move them to the test directory
         //by default if file exist it won't be overwritten, so we need to implement option force & patch
