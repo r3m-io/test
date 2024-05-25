@@ -141,7 +141,7 @@ trait Main {
         }
 //        ./vendor/bin/pest --init
         //collect every test directory and move them to the test directory
-        //by default if file exist it wont be overwritten, so we need to implement option force & patch
+        //by default if file exist it won't be overwritten, so we need to implement option force & patch
 
 
         return $dir_vendor;
