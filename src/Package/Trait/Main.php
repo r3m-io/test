@@ -42,7 +42,7 @@ trait Main {
                     $line = explode(' ', $line, 2);
                     $package = $line[0];
                     $record = trim($line[1]);
-                    $line = explode(' ', $line, 2);
+                    $line = explode(' ', $record, 2);
                     $version = $line[0];
                     $description = trim($line[1]);
                     $packages[$package] = [
