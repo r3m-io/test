@@ -201,12 +201,15 @@ trait Main {
             echo $notification;
         }
         if($code !== 0){
+            /*
             $exception = new Exception('Pest initialization failed...');
             Event::trigger($object, 'r3m.io.test.main.run.test', [
                 'options' => $options,
                 'exception' => $exception
             ]);
             throw $exception;
+            */
+            exit($code);
         }
         //collect every test directory and move them to the test directory
         //by default if file exist it won't be overwritten, so we need to implement option force & patch
