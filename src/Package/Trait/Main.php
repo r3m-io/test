@@ -53,7 +53,7 @@ trait Main {
                     ];
                 }
             }
-//            echo $output;
+            echo $output;
         }
         if($notification){
 //            echo $notification;
