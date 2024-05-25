@@ -188,9 +188,11 @@ trait Main {
             $exception = new Exception('Pest initialization failed...');
             Event::trigger($object, 'r3m.io.test.main.run.test', [
                 'options' => $options,
-                'exception' => $exception
+                'exception' => $exception,
+                'output' => $output,
+                'notification' => $notification
             ]);
-            throw $exception;
+            exit($code);
         }
         $command = './vendor/bin/pest';
         $code = Core::execute($object, $command, $output, $notification);
@@ -201,19 +203,16 @@ trait Main {
             echo $notification;
         }
         if($code !== 0){
-            /*
-            $exception = new Exception('Pest initialization failed...');
+            $exception = new Exception('Pest Tests failed...');
             Event::trigger($object, 'r3m.io.test.main.run.test', [
                 'options' => $options,
-                'exception' => $exception
+                'exception' => $exception,
+                'output' => $output,
+                'notification' => $notification
             ]);
-            throw $exception;
-            */
             exit($code);
         }
-        //collect every test directory and move them to the test directory
-        //by default if file exist it won't be overwritten, so we need to implement option force & patch
-        $dir_output = $dir->read($object->config('project.dir.test'), true);
-        return $dir_output;
+//        $dir_output = $dir->read($object->config('project.dir.test'), true);
+        return null;
     }
 }
