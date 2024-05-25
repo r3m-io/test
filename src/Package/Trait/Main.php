@@ -3,15 +3,17 @@ namespace Package\R3m\Io\Test\Trait;
 
 use R3m\Io\Config;
 
-use R3m\Io\Exception\FileWriteException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Event;
 use R3m\Io\Module\Dir;
+use R3m\Io\Module\File;
 
 use Exception;
 
+use R3m\Io\Exception\FileWriteException;
 use R3m\Io\Exception\FileAppendException;
 use R3m\Io\Exception\ObjectException;
+
 
 trait Main {
 
@@ -94,6 +96,9 @@ trait Main {
                 'Tests'
             ];
         }
+        ddd($object->config('project.dir'));
+        Dir::create($object->config('project.dir.test'));
+
         foreach($dir_vendor as $nr => $record){
             $package = $record->name;
             if(
@@ -108,13 +113,27 @@ trait Main {
                 if($dir_inner){
                     foreach($dir_inner as $dir_inner_nr => $dir_record){
                         foreach($dir_tests as $dir_test){
-                            $dir_test = $dir_record->url . $dir_test . $object->config('ds');
-                            d($dir_test);
+                            $dir_test_url = $dir_record->url . $dir_test . $object->config('ds');
+                            if(
+                                File::exist($dir_test_url) &&
+                                Dir::is($dir_test_url)
+                            ){
+                                $dir_test_read = $dir->read($dir_test_url);
+                                if($dir_test_read){
+                                    foreach($dir_test_read as $dir_test_nr => $dir_test_record){
+                                        if($dir_test_record === File::TYPE){
+
+                                            //cp $dir_test_record->url to test directory
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+//        ./vendor/bin/pest --init
         //collect every test directory and move them to the test directory
         //by default if file exist it wont be overwritten, so we need to implement option force & patch
 
