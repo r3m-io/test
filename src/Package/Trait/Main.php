@@ -194,7 +194,7 @@ trait Main {
         echo CLi::info('test') . PHP_EOL;
         echo CLi::notice('test') . PHP_EOL;
         echo CLi::warning('test') . PHP_EOL;
-        echo Cli::labels();
+        Cli::labels();
         $command = './vendor/bin/pest --init';
         $code = Core::execute($object, $command, $output, $notification);
         if($output){
