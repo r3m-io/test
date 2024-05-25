@@ -131,23 +131,13 @@ trait Main {
                                 if($dir_test_read){
                                     if(array_key_exists($record->name . '/' . $dir_record->name, $packages)){
                                         $package = $packages[$record->name . '/' . $dir_record->name];
-                                        echo Cli::alert('Copying', [
+                                        echo Cli::info('Copying', [
                                             'capitals' => true
                                             ]) .
                                             ' tests from ' . $package['name'] .
                                             ' with version: '.
                                             $package['version'] . PHP_EOL
                                         ;
-                                        echo CLi::critical('test') . PHP_EOL;
-                                        echo CLi::debug('test') . PHP_EOL;
-                                        echo CLi::emergency('test') . PHP_EOL;
-                                        echo CLi::error('test') . PHP_EOL;
-                                        echo CLi::info('test') . PHP_EOL;
-                                        echo CLi::notice('test') . PHP_EOL;
-                                        echo CLi::warning('test') . PHP_EOL;
-
-
-
                                     }
                                     foreach($dir_test_read as $dir_test_nr => $file){
                                         if($file->type === File::TYPE){
@@ -195,6 +185,24 @@ trait Main {
         $write[] = 'require_once __DIR__ . \'/../vendor/autoload.php\';';
         $write[] = '';
         File::write($object->config('project.dir.test') . 'bootstrap.php', implode(PHP_EOL, $write));
+
+        echo CLi::alert('test') . PHP_EOL;
+        echo CLi::critical('test') . PHP_EOL;
+        echo CLi::debug('test') . PHP_EOL;
+        echo CLi::emergency('test') . PHP_EOL;
+        echo CLi::error('test') . PHP_EOL;
+        echo CLi::info('test') . PHP_EOL;
+        echo CLi::notice('test') . PHP_EOL;
+        echo CLi::warning('test') . PHP_EOL;
+
+        echo CLi::alert(' ') . 'alert' . PHP_EOL;
+        echo CLi::critical(' ') . 'critical' . PHP_EOL;
+        echo CLi::debug(' ') . 'debug' . PHP_EOL;
+        echo CLi::emergency(' ') . 'emergency' . PHP_EOL;
+        echo CLi::error(' ') . 'error' . PHP_EOL;
+        echo CLi::info(' ') . 'info' . PHP_EOL;
+        echo CLi::notice(' ') . 'notice' . PHP_EOL;
+        echo CLi::warning(' ') . 'warning' . PHP_EOL;
         $command = './vendor/bin/pest --init';
         $code = Core::execute($object, $command, $output, $notification);
         if($output){
