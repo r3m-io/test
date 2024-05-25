@@ -72,7 +72,7 @@ trait Main {
                 ) &&
                 $record->type === Dir::TYPE
             ){
-                $dir_inner = $dir->read($object->config($record->url));
+                $dir_inner = $dir->read($record->url);
                 d($dir_inner);
             }
         }
