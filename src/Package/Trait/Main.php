@@ -73,7 +73,6 @@ trait Main {
         //only pest tests are supported
         $testable = [];
         $testable[] = 'r3m_io';
-        $testable[] = 'defuse';
         if(
             property_exists($options, 'testable') &&
             is_array($options->testable)
@@ -114,16 +113,9 @@ trait Main {
                 $dir_inner = $dir->read($record->url);
                 if($dir_inner){
                     foreach($dir_inner as $dir_inner_nr => $dir_record){
-                        d($dir_record);
-                        if($dir_record->name === 'php-encryption'){
-                            $read = $dir->read($dir_record->url);
-                            d($read);
-                        }
                         foreach($dir_tests as $dir_test){
                             $dir_test_url = $dir_record->url . $dir_test . $object->config('ds');
-                            d($dir_test_url);
                             $read = $dir->read($dir_test_url);
-                            d($read);
                             if(
                                 File::exist($dir_test_url) &&
                                 Dir::is($dir_test_url)
