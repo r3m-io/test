@@ -112,6 +112,7 @@ trait Main {
                 $record->type === Dir::TYPE
             ){
                 $dir_inner = $dir->read($record->url);
+                d($dir_inner);
                 if($dir_inner){
                     foreach($dir_inner as $dir_inner_nr => $dir_record){
                         foreach($dir_tests as $dir_test){
