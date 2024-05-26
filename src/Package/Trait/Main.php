@@ -73,6 +73,7 @@ trait Main {
         //only pest tests are supported
         $testable = [];
         $testable[] = 'r3m_io';
+        $testable[] = 'monolog';
         if(
             property_exists($options, 'testable') &&
             is_array($options->testable)
@@ -143,6 +144,7 @@ trait Main {
                                         if($file->type === File::TYPE){
                                             $read = File::read($file->url);
                                             if(str_contains($read, 'PHPUnit\Framework\TestCase')){
+                                                d('found PHPUnit test');
                                                 //we want pest tests
                                                 continue;
                                             }
