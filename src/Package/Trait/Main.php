@@ -112,9 +112,12 @@ trait Main {
                 $record->type === Dir::TYPE
             ){
                 $dir_inner = $dir->read($record->url);
-                d($dir_inner);
                 if($dir_inner){
                     foreach($dir_inner as $dir_inner_nr => $dir_record){
+                        if($dir_record->name === 'monolog'){
+                            $read = $dir->read($dir_record->url);
+                            d($read);
+                        }
                         foreach($dir_tests as $dir_test){
                             $dir_test_url = $dir_record->url . $dir_test . $object->config('ds');
                             d($dir_test_url);
