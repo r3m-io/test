@@ -185,7 +185,7 @@ trait Main {
         $write[] = 'require_once __DIR__ . \'/../vendor/autoload.php\';';
         $write[] = '';
         File::write($object->config('project.dir.test') . 'bootstrap.php', implode(PHP_EOL, $write));
-        Cli::labels();
+        echo Cli::labels();
         $command = './vendor/bin/pest --init';
         $code = Core::execute($object, $command, $output, $notification);
         if($output){
