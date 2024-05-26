@@ -115,7 +115,7 @@ trait Main {
                 if($dir_inner){
                     foreach($dir_inner as $dir_inner_nr => $dir_record){
                         d($dir_record);
-                        if($dir_record->name === 'monolog'){
+                        if($dir_record->name === 'php-encryption'){
                             $read = $dir->read($dir_record->url);
                             d($read);
                         }
