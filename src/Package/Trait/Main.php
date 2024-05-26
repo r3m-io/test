@@ -73,7 +73,7 @@ trait Main {
         //only pest tests are supported
         $testable = [];
         $testable[] = 'r3m_io';
-        $testable[] = 'monolog';
+        $testable[] = 'defuse';
         if(
             property_exists($options, 'testable') &&
             is_array($options->testable)
@@ -114,6 +114,7 @@ trait Main {
                 $dir_inner = $dir->read($record->url);
                 if($dir_inner){
                     foreach($dir_inner as $dir_inner_nr => $dir_record){
+                        d($dir_record);
                         if($dir_record->name === 'monolog'){
                             $read = $dir->read($dir_record->url);
                             d($read);
