@@ -117,6 +117,8 @@ trait Main {
                         foreach($dir_tests as $dir_test){
                             $dir_test_url = $dir_record->url . $dir_test . $object->config('ds');
                             d($dir_test_url);
+                            $read = $dir->read($dir_test_url);
+                            d($read);
                             if(
                                 File::exist($dir_test_url) &&
                                 Dir::is($dir_test_url)
