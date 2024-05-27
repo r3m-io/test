@@ -56,7 +56,6 @@ trait Main {
             }
             echo $output;
         }
-        ddd('end');
         if($notification){
 //            echo $notification;
         }
