@@ -25,6 +25,7 @@ trait Main {
      */
     public function run_test($flags, $options): void
     {
+        Core::interactive();
         $object = $this->object();
         if($object->config(Config::POSIX_ID) !== 0){
             $exception = new Exception('Only root can run tests...');
@@ -57,7 +58,7 @@ trait Main {
             echo $output;
         }
         if($notification){
-//            echo $notification;
+            echo $notification;
         }
         $dir = new Dir();
         $dir_vendor = $dir->read($object->config('project.dir.vendor'));
